@@ -27,10 +27,15 @@ class App extends Component {
     this.setState({value: event.target.value})
   }
 
+  changeComplete = (event) => {
+    const newArrayToChange = this.state.todos.slice();
+    const todoItemToChange = newArrayToChange[event.target.id-1];
+    todoItemToChange.completed ? todoItemToChange.completed = false : todoItemToChange.completed = true;
+    this.setState({todos: newArrayToChange})
+  }
 
   render() {
     const todosList = this.state.todos;
-    console.log(todosList);
     
     return (
       <section className="todoapp">
@@ -39,7 +44,10 @@ class App extends Component {
           <input value={this.state.value} className="new-todo" placeholder="What needs to be done?" 
             onKeyUp={this.handleKeyPress} onChange={this.handleChange} autoFocus></input>
         </header>
-        <ToDoList todos={todosList}/>
+        <ToDoList 
+          todos={todosList} 
+          onClick={(event) => this.changeComplete(event)}
+        />
         <footer className="footer">
           <span className="todo-count"><strong>0</strong> item(s) left</span>
           <button className="clear-completed">Clear completed</button>
@@ -51,13 +59,18 @@ class App extends Component {
 
 class ToDoList extends Component {
 
-
   render() {
     return (
       <React.Fragment>
         <section className="main">
           <ul className="todo-list">
-            {this.props.todos.map( todo => <TodoItem toDoItem={todo.title} toDoCompleted={todo.completed}/> )}
+            {this.props.todos.map( todo => <TodoItem 
+              key ={todo.id}
+              id = {todo.id}
+              toDoItem={todo.title} 
+              toDoCompleted={todo.completed} 
+              onClick={(event) => this.props.onClick(event)}
+            /> )}
           </ul>
         </section>
       </React.Fragment>
@@ -65,27 +78,25 @@ class ToDoList extends Component {
   }
 }
 
-class TodoItem extends Component {
+function TodoItem(props) {
   
-  render() {
-    const isCompleted = this.props.toDoCompleted;
+    const isCompleted = props.toDoCompleted;
 
     const renderComplete = isCompleted ? (
-      <input className="toggle" type="checkbox" checked></input>
+      <input onClick={props.onClick} className="toggle" id={props.id} type="checkbox" defaultChecked></input>
     ) : (
-      <input className="toggle" type="checkbox"></input>
+      <input onClick={props.onClick} className="toggle" id={props.id} type="checkbox"></input>
     )
 
     return (
       <li className={isCompleted? 'completed': ''}>
         <div className="view">
           {renderComplete}
-          <label>{this.props.toDoItem}</label>
+          <label>{props.toDoItem}</label>
           <button className="destory"></button>
         </div>
       </li>
     )   
   }
-}
 
 export default App;
