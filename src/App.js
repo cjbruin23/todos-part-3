@@ -43,6 +43,17 @@ class App extends Component {
     this.setState({todos: newArrayToChange});
   }
 
+  deleteAll = () => {
+    const newArrayToChange = this.state.todos.slice();
+    for (let i = 0; i < newArrayToChange.length; i++) {
+      const indItem = newArrayToChange[i];
+      if (indItem.completed === true) {
+       newArrayToChange.splice(i, 1);
+      }
+    }
+    this.setState({todos: newArrayToChange})
+  }
+
   render() {
     const todosList = this.state.todos;
     
@@ -60,7 +71,7 @@ class App extends Component {
         />
         <footer className="footer">
           <span className="todo-count"><strong>0</strong> item(s) left</span>
-          <button className="clear-completed">Clear completed</button>
+          <button className="clear-completed" onClick={this.deleteAll}>Clear completed</button>
         </footer>
       </section>
     );
