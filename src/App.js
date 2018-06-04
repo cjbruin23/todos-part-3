@@ -29,17 +29,17 @@ class App extends Component {
 
   changeComplete = (event) => {
     const newArrayToChange = this.state.todos.slice();
-    const index = newArrayToChange.findIndex(x => x.id==event.target.id)
-    console.log(index)
-   
+    const index = newArrayToChange.findIndex(x => x.id==event.target.id)   
     const todoItemToChange = newArrayToChange[index];
+
     todoItemToChange.completed ? todoItemToChange.completed = false : todoItemToChange.completed = true;
     this.setState({todos: newArrayToChange});
   }
 
   changeDestroy = (event) => {
     const newArrayToChange = this.state.todos.slice();
-    newArrayToChange.splice(event.target.id-1, 1);
+    const index = newArrayToChange.findIndex(x => x.id==event.target.id)   
+    newArrayToChange.splice(index, 1);
     this.setState({todos: newArrayToChange});
   }
 
