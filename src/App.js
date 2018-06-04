@@ -29,8 +29,17 @@ class App extends Component {
 
   changeComplete = (event) => {
     const newArrayToChange = this.state.todos.slice();
-    const todoItemToChange = newArrayToChange[event.target.id-1];
+    const index = newArrayToChange.findIndex(x => x.id==event.target.id)
+    console.log(index)
+   
+    const todoItemToChange = newArrayToChange[index];
     todoItemToChange.completed ? todoItemToChange.completed = false : todoItemToChange.completed = true;
+    this.setState({todos: newArrayToChange});
+  }
+
+  changeDestroy = (event) => {
+    const newArrayToChange = this.state.todos.slice();
+    newArrayToChange.splice(event.target.id-1, 1);
     this.setState({todos: newArrayToChange});
   }
 
@@ -47,6 +56,7 @@ class App extends Component {
         <ToDoList 
           todos={todosList} 
           onClick={(event) => this.changeComplete(event)}
+          destoryOnClick={(event) => this.changeDestroy(event)}
         />
         <footer className="footer">
           <span className="todo-count"><strong>0</strong> item(s) left</span>
@@ -70,6 +80,7 @@ class ToDoList extends Component {
               toDoItem={todo.title} 
               toDoCompleted={todo.completed} 
               onClick={(event) => this.props.onClick(event)}
+              destoryOnClick={(event) => this.props.destoryOnClick(event)}
             /> )}
           </ul>
         </section>
@@ -93,7 +104,7 @@ function TodoItem(props) {
         <div className="view">
           {renderComplete}
           <label>{props.toDoItem}</label>
-          <button className="destory"></button>
+          <button className="destroy" onClick={props.destoryOnClick} id={props.id}></button>
         </div>
       </li>
     )   
