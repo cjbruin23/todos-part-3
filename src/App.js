@@ -31,7 +31,7 @@ class App extends Component {
     const newArrayToChange = this.state.todos.slice();
     const todoItemToChange = newArrayToChange[event.target.id-1];
     todoItemToChange.completed ? todoItemToChange.completed = false : todoItemToChange.completed = true;
-    this.setState({todos: newArrayToChange})
+    this.setState({todos: newArrayToChange});
   }
 
   render() {

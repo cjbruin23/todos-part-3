@@ -1,11 +1,11 @@
 {
-  "homepage": "http://cjbruin23.github.io/todos-part-1",
+  "homepage": "http://cjbruin23.github.io/todos-part-2",
   "name": "todos",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "create-react-app": "^1.5.2",
-    "gh-pages": "^1.1.0",
+    "gh-pages": "^1.2.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4"
