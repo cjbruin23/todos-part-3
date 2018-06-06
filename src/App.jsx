@@ -73,13 +73,13 @@ class App extends Component {
             onKeyUp={this.handleKeyPress} onChange={this.handleChange} autoFocus></input>
         </header>
         <Switch>
-          <Route exact path="#/" render={(props) => (
+          <Route exact path="/" render={(props) => (
             <ToDoList {...props} {...extraProps} todos={todosList}/>
           )}/>
-          <Route exact path="#/active" render={(props) => (
+          <Route exact path="/active" render={(props) => (
             <ToDoList {...props} {...extraProps} todos={filteredActive}/>
           )}/>
-          <Route exact path="#/completed" render={(props) => (
+          <Route exact path="/completed" render={(props) => (
             <ToDoList {...props} {...extraProps} todos={filteredComplete}/>
           )}/>
         </Switch>
@@ -89,13 +89,13 @@ class App extends Component {
           <span className="todo-count"><strong>0</strong> item(s) left</span>
           <ul className="filters">
             <li>
-              <Link to="#/">All</Link>
+              <Link to="/">All</Link>
             </li>
             <li>
-              <Link to="#/active">Active</Link>
+              <Link to="/active">Active</Link>
             </li>
             <li>
-              <Link to="#/completed">Completed</Link>
+              <Link to="/completed">Completed</Link>
             </li>
           </ul>
           <button className="clear-completed" onClick={this.deleteAll}>Clear completed</button>
